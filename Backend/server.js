@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("TaskFlow SQLite backend is running");
+  res.send("maximus SQLite backend is running");
 });
 
 app.use("/api/auth", authRoutes);

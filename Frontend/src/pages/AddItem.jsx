@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Form page for creating a new task
 function AddItem({ setTasks }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -8,6 +9,7 @@ function AddItem({ setTasks }) {
 
   const navigate = useNavigate();
 
+  // Validates fields, posts to API, appends new task to state, then redirects
   function addTask(e) {
     e.preventDefault();
 
@@ -24,20 +26,14 @@ function AddItem({ setTasks }) {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token
       },
-      body: JSON.stringify({
-        title,
-        description,
-        priority
-      })
+      body: JSON.stringify({ title, description, priority })
     })
       .then((res) => res.json())
       .then((newTask) => {
         setTasks((oldTasks) => [...oldTasks, newTask]);
-
         setTitle("");
         setDescription("");
         setPriority("Medium");
-
         alert("Task added!");
         navigate("/list");
       });
@@ -47,19 +43,13 @@ function AddItem({ setTasks }) {
     <div className="page">
       <h1>Add Task</h1>
 
+      {/* Controlled form — all fields map directly to state */}
       <form className="form" onSubmit={addTask}>
         <label>Task Title</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 
         <label>Description</label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
         <label>Priority</label>
         <select value={priority} onChange={(e) => setPriority(e.target.value)}>
