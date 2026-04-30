@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     if (!token) return;
 
-    fetch("http://localhost:5050/api/tasks", {
+    fetch("https://maximus-task-manager.onrender.com/api/tasks", {
       headers: {
         Authorization: "Bearer " + token
       }

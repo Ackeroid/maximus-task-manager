@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const API_URL = "https://maximus-task-manager.onrender.com";
+
 function Register({ goToLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +15,7 @@ function Register({ goToLogin }) {
       return;
     }
 
-    fetch("http://localhost:5050/api/auth/register", {
+    fetch(`${API_URL}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -22,8 +24,17 @@ function Register({ goToLogin }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert(data.message);
-        goToLogin();
+        console.log("Register response:", data);
+
+        alert(data.message || "Register request finished");
+
+        if (data.message === "Account created") {
+          goToLogin();
+        }
+      })
+      .catch((error) => {
+        console.log("Register error:", error);
+        alert("Could not connect to backend");
       });
   }
 
@@ -51,12 +62,14 @@ function Register({ goToLogin }) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button>Create Account</button>
+        <button type="submit">Create Account</button>
       </form>
 
       <p>
         Already have an account?{" "}
-        <button onClick={goToLogin}>Login</button>
+        <button type="button" onClick={goToLogin}>
+          Login
+        </button>
       </p>
     </div>
   );

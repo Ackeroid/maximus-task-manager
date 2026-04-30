@@ -18,7 +18,7 @@ function AddItem({ setTasks }) {
 
     const token = localStorage.getItem("token");
 
-    fetch("http://localhost:5050/api/tasks", {
+    fetch("https://maximus-task-manager.onrender.com/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -9,7 +9,7 @@ function List({ tasks, setTasks }) {
   function deleteTask(id) {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:5050/api/tasks/${id}`, {
+    fetch(`https://maximus-task-manager.onrender.com/api/tasks/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + token
@@ -23,7 +23,7 @@ function List({ tasks, setTasks }) {
     const task = tasks.find((task) => task.id === id);
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:5050/api/tasks/${id}`, {
+    fetch(`https://maximus-task-manager.onrender.com/api/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function List({ tasks, setTasks }) {
   function saveEdit() {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:5050/api/tasks/${editId}`, {
+    fetch(`https://maximus-task-manager.onrender.com/api/tasks/${editId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
